@@ -534,3 +534,5 @@ app.delete('/contractors/:id', authenticate, async (req, res) => {
 app.listen(PORT, () => {
    console.log(`Server running on port ${PORT}`);
 });
+
+// Test commit for Git hook
