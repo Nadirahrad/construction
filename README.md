@@ -14,5 +14,3 @@ This project is a CRM system for contractors in the construction industry. The g
 ```bash
 git clone https://github.com/Nadirahrad/construction.git
 cd construction
-
-//changes 
