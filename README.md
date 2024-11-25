@@ -1,9 +1,18 @@
-// This is a test comment for verify the pre-commit hook
-# Project Title
+# Construction CRM System
 
 ## Description
-Briefly describe the project, its purpose, and key features.
+This project is a CRM system for contractors in the construction industry. The goal is to help manage contractor data and facilitate the renewal of licenses.
+
+## Features
+- Manage contractors' information
+- Update, delete, and create contractors
+- Integration with the pre-commit hook for testing
 
 ## Installation
+
+### 1. Clone the repository:
 ```bash
-npm install
+git clone https://github.com/Nadirahrad/construction.git
+cd construction
+
+//changes 
