@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const contractorRoutes = require('./routes/contractors'); // Contractor routes
+const contractorRoutes = require('./routes/contractorRoutes'); // Contractor routes
 const adminRoutes = require('./routes/admin'); // Admin routes
 const authRoutes = require('./routes/auth'); // Authentication routes
 // other imports and middleware here

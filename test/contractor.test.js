@@ -257,7 +257,12 @@ let token;
 let contractorId;
 
 beforeAll(async () => {
-    token = jwt.sign({ userId: 'dummyUserId' }, process.env.JWT_SECRET || 'n1a2d3r4', { expiresIn: '1h' });
+    // Tambahkan `role` ke token untuk memenuhi keperluan middleware
+    token = jwt.sign(
+        { userId: 'dummyUserId', role: 'admin' },
+        process.env.JWT_SECRET || 'n1a2d3r4',
+        { expiresIn: '1h' }
+    );
 
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test', {
         useNewUrlParser: true,
