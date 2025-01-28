@@ -2,6 +2,9 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const contractorRoutes = require('./routes/contractors'); // Contractor routes
+const adminRoutes = require('./routes/admin'); // Admin routes
+const authRoutes = require('./routes/auth'); // Authentication routes
 // other imports and middleware here
 
 const app = express();
@@ -19,6 +22,8 @@ app.use(express.json());
 
 // Your routes here
 app.use('/contractors', require('./routes/contractorRoutes'));
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Export the app without listening
 module.exports = app;

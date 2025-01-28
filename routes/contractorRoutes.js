@@ -1,12 +1,11 @@
-// routes/contractorRoutes.js
 const express = require('express');
 const Contractor = require('../models/Contractor');
-const { authenticate } = require('../middleware/authenticate'); // Make sure you have an authentication middleware if necessary
+const { authenticate, checkRole } = require('../middleware/authenticate'); // Middleware untuk autentikasi dan peranan
 
 const router = express.Router();
 
-// Create a contractor
-router.post('/', authenticate, async (req, res) => {
+// Cipta kontraktor (Admin sahaja)
+router.post('/', authenticate, checkRole('admin'), async (req, res) => {
     try {
         const contractor = new Contractor(req.body);
         await contractor.save();
@@ -16,7 +15,7 @@ router.post('/', authenticate, async (req, res) => {
     }
 });
 
-// Get all contractors
+// Dapatkan semua kontraktor (Semua pengguna yang telah login)
 router.get('/', authenticate, async (req, res) => {
     try {
         const contractors = await Contractor.find();
@@ -26,8 +25,8 @@ router.get('/', authenticate, async (req, res) => {
     }
 });
 
-// Update contractor by ID
-router.put('/:id', authenticate, async (req, res) => {
+// Kemas kini kontraktor berdasarkan ID (Admin sahaja)
+router.put('/:id', authenticate, checkRole('admin'), async (req, res) => {
     try {
         const contractor = await Contractor.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!contractor) return res.status(404).send({ error: 'Contractor not found' });
@@ -37,8 +36,8 @@ router.put('/:id', authenticate, async (req, res) => {
     }
 });
 
-// Delete contractor by ID
-router.delete('/:id', authenticate, async (req, res) => {
+// Padam kontraktor berdasarkan ID (Admin sahaja)
+router.delete('/:id', authenticate, checkRole('admin'), async (req, res) => {
     try {
         const contractor = await Contractor.findByIdAndDelete(req.params.id);
         if (!contractor) return res.status(404).send({ error: 'Contractor not found' });
@@ -49,3 +48,4 @@ router.delete('/:id', authenticate, async (req, res) => {
 });
 
 module.exports = router;
+
