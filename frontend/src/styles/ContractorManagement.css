@@ -1,0 +1,52 @@
+.contractor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.contractor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1260c4;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.contractor-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.logo {
+    width: 100px;  /* Ubah saiz ikut kesesuaian */
+    height: auto;
+    margin-right: 10px; /* Jarak antara logo & tajuk */
+}
+
+.logout-button {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.logout-button:hover {
+    background: #5a6268;
+}
+
+.contractor-content {
+    flex: 1;
+    padding: 20px;
+}
