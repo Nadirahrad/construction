@@ -6,9 +6,13 @@ import ContractorManagement from "./pages/ContractorManagement";
 import "./App.css";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(
+    localStorage.getItem("token") ? true : false
+  );
+  
 
-  const handleLogin = () => {
+  const handleLogin = (token) => {
+    localStorage.setItem("token", token);
     setIsAuthenticated(true);
   };
 

@@ -1,63 +1,58 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, provider } from "../firebaseConfig";
+import { signInWithPopup } from "firebase/auth";
 import "../styles/Login.css";
+import { FcGoogle } from "react-icons/fc";
 
-const Login = ({ onLogin = () => {} }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+const Login = ({onLogin}) => {
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-
+  const handleGoogleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
+      const result = await signInWithPopup(auth, provider);
+      console.log("✅ User Info:", result.user);
+
+      const userData = {
+        email: result.user.email,
+        uid: result.user.uid,
+      };
+
+      const res = await fetch("http://localhost:4000/api/auth/google-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(userData),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Login failed");
+      console.log("🎯 Backend response:", data);
 
-      localStorage.setItem("token", data.token); // Simpan token
-      onLogin(); // Update state authentication di App.js
-      navigate("/contractors"); // Redirect ke dashboard
-    } catch (err) {
-      setError(err.message);
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        onLogin(data.token);
+        console.log("📌 Redirecting...");
+        navigate("/contractors");// 👈 Ganti navigate()
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("🔥 Google Login Error:", error);
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Login</h2>
-        {error && <p className="error-message">{error}</p>}
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
+        <h2 className="company-name">MTI</h2>
+        <p className="login-subtext">Sign in to access your dashboard</p>
+        <button className="google-btn" onClick={handleGoogleLogin}>
+          <FcGoogle size={24} /> Continue with Google
+        </button>
       </div>
     </div>
   );
 };
 
+
 export default Login;
-
-
 

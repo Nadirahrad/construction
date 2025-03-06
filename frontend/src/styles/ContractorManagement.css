@@ -50,3 +50,28 @@
     flex: 1;
     padding: 20px;
 }
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 5px;
+  }
+  
+  .edit-btn svg {
+    color: blue;
+  }
+  
+  .delete-btn svg {
+    color: rgb(241, 228, 228);
+  }
+  
+  .edit-btn:hover svg {
+    color: darkblue;
+  }
+  
+  .delete-btn:hover svg {
+    color: rgb(252, 246, 246);
+  }
+  
