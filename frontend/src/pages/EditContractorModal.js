@@ -70,8 +70,8 @@ const EditContractorModal = ({ contractor, onClose, onSave }) => {
     value={formData.gender} 
     onChange={(value) => setFormData({ ...formData, gender: value })}
   >
-    <Select.Option value="Male">Male</Select.Option>
-    <Select.Option value="Female">Female</Select.Option>
+    <Select.Option value="LELAKI">LELAKI</Select.Option>
+    <Select.Option value="WANITA">WANITA</Select.Option>
   </Select>
 </Form.Item>
           <Form.Item label="Position">
