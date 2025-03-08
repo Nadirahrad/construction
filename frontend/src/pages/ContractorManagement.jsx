@@ -303,7 +303,7 @@ const ContractorManagement = () => {
             setCurrentPage(1);}}
         />
         <div className="contractor-content">
-          <h2>Contractor List</h2>
+          <h2>Senarai Kontraktor</h2>
           <button className="delete-multiple-btn" onClick={handleDeleteMultiple} disabled={selectedContractors.length === 0}>Delete Selected</button>
           <table className="contractor-table">
             <thead>
@@ -314,19 +314,19 @@ const ContractorManagement = () => {
         checked={currentContractors.length > 0 && currentContractors.every(c => selectedContractors.includes(c._id))}
       />
       </th>
-                <th>No.</th>
-                <th>Name</th>
-            <th>IC/Passport</th>
-            <th>Gender</th>
-            <th>Position</th>
-            <th>Company</th>
-            <th>CIDB Registration</th>
-            <th>Grade</th>
-            <th>State</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Renew</th>
-                <th>Actions</th>
+                <th>NO</th>
+                <th>NAMA</th>
+            <th>NO IC/PASSPORT</th>
+            <th>JANTINA</th>
+            <th>JAWATAN</th>
+            <th>NAMA SYARIKAT</th>
+            <th>NO. PENDAFTARAN CIDB</th>
+            <th>GRED</th>
+            <th>NEGERI</th>
+            <th>EMAIL</th>
+            <th>NO.TELEFON</th>
+            <th>RENEW</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
