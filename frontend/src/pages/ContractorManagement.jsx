@@ -178,25 +178,30 @@ const ContractorManagement = () => {
   };
 
   const handleRenewStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === "completed" ? "pending" : "completed";
-  
+    let newStatus = ""; 
+
+    if (currentStatus === "") {
+        newStatus = "renew";  // Dari kosong ke "renew"
+    } else if (currentStatus === "renew") {
+        newStatus = "completed";  // Dari "renew" ke "complete"
+    } else if (currentStatus === "completed") {
+        newStatus = "";  // Dari "complete" ke kosong (jika nak boleh untick balik)
+    }
+
     try {
-      const response = await axios.put(`http://localhost:4000/api/contractors/${id}/renew`, { renewStatus: newStatus });
-  
-        // Jika baru ditick (completed), auto untick selepas 2 saat
+        const response = await axios.put(`http://localhost:4000/api/contractors/${id}/renew`, { renewStatus: newStatus });
+
         if (response.status === 200) {
-          setContractors((prev) =>
-            prev.map((contractor) =>
-              contractor._id === id
-                ? { ...contractor, renewStatus: newStatus }
-                : contractor
-            )
-          );
+            setContractors((prev) =>
+                prev.map((contractor) =>
+                    contractor._id === id ? { ...contractor, renewStatus: newStatus } : contractor
+                )
+            );
         }
     } catch (error) {
-      console.error("Error updating renew status:", error);
+        console.error("Error updating renew status:", error);
     }
-  };
+};
 
   const handleKeyDown = (e, nextField) => {
     if (e.key === "Enter") {
@@ -335,7 +340,7 @@ const ContractorManagement = () => {
                   <tr key={contractor._id}
                   style={{
                     backgroundColor:
-                      contractor.renewStatus === "completed" ? "lightgreen" : "transparent",
+                      contractor.renewStatus === "renew" ? "lightgreen" : "transparent",
                   }}>
                     <td>
                     <input type="checkbox" checked={selectedContractors.includes(contractor._id)} onChange={() => handleCheckboxChange(contractor._id)} />
@@ -357,6 +362,14 @@ const ContractorManagement = () => {
     checked={contractor.renewStatus === "completed"}
     onChange={() => handleRenewStatus(contractor._id, contractor.renewStatus)}
   />
+  
+  {contractor.renewStatus === "renew" && (
+    <span style={{ color: "green", fontWeight: "bold" }}>renew</span>
+  )}
+  {contractor.renewStatus === "completed" && (
+    <span style={{ color: "blue", fontWeight: "bold" }}>complete</span>
+  )}
+
 </td>
                       <td>
                       <button className="edit-btn" onClick={() => handleEdit(contractor)}><Pencil size={18}/></button>

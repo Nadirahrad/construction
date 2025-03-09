@@ -12,7 +12,7 @@ const contractorSchema = new mongoose.Schema({
   state: { type: String, default: "" },
   email: { type: String, default: "" },
   phone: { type: String, default: "" },
-  renewStatus: { type: String, enum: ["pending", "completed"], default: "pending" }
+  renewStatus: { type: String, enum: ["pending", "completed", "renew"], default: "pending" }
 });
 
 module.exports = mongoose.model("Contractor", contractorSchema);

@@ -61,7 +61,10 @@ exports.importExcel = async (req, res) => {
   grade: item["GRED"] || "",
   state: item["NEGERI"] || "",
   email: item["EMAIL"] || "",
-  phone: item["NO.TELEFON"] || ""
+  phone: item["NO.TELEFON"] || "",
+  renewStatus: item["Pilihan MTI"] === "YA Saya nak MTI uruskan sepenuhnya dengan harga terbaik" 
+               ? "renew" 
+               : "pending"
 }));
 
     // Masukkan ke database secara bulk insert
